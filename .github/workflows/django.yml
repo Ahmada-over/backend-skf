@@ -35,7 +35,6 @@ jobs:
       run: |
         docker push ahma25/skf-management:latest
     - name: Deploy to Render
-      uses: render-oss/action@v1
-      with:
-        serviceId: ${{ secrets.RENDER_SERVICE_ID}}
-        apiKey: ${{ secrets.RENDER_API_KEY }}
+      run: | 
+        render services redeploy ${{ secrets.RENDER_SERVICE_ID }} \
+        --api-key ${{ secrets.RENDER_API_KEY }}
