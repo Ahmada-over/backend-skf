@@ -13,14 +13,14 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.10,3.12]
+        python-version: [3.12]
 
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v3
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: 3.12
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
@@ -28,3 +28,14 @@ jobs:
     - name: Run Tests
       run: |
         python manage.py test
+    - name: Build Docker image
+      run: |
+        docker build -t ahma25/skf-management:latest .
+    - name: Push Docker image
+      run: |
+        docker push ahma25/skf-management:latest
+    - name: Deploy to Render
+      uses: render-oss/action@v1
+      with:
+        serviceId: ${{ secrets.RENDER_SERVICE_ID}}
+        apiKey: ${{ secrets.RENDER_API_KEY }}
