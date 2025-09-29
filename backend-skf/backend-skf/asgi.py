@@ -1,5 +1,5 @@
 """
-ASGI config for backend_skf project.
+ASGI config for backend-skf project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend_skf.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "backend-skf.settings")
 
 application = get_asgi_application()

@@ -1,0 +1,10 @@
+version: '3.12'
+
+services:
+  app:
+    build: .
+    image: ahma25/skf-management:v1.0
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
