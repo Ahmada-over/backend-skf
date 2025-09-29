@@ -43,7 +43,9 @@ jobs:
     - name: Push Docker image
       run: |
         docker push ahma25/skf-management:latest
-    - name: Deploy to Render
-      run: | 
-        render services redeploy ${{ secrets.RENDER_SERVICE_ID }} \
-        --api-key ${{ secrets.RENDER_API_KEY }}
+    - name: Deployer via API Render
+      run: |
+        curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+          -H "Accept: application/json" \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          -d '{}'
